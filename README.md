@@ -145,3 +145,64 @@ Platform, kullanıcı deneyimi, arama motoru optimizasyonu ve web erişilebilirl
 ### 4. Güvenlik ve Üretim Ayarları
 - `DEBUG=False` modunda HTTPS yönlendirmesi (`SECURE_SSL_REDIRECT`), güvenli çerezler (`SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`), XSS ve Clickjacking koruması (`X_FRAME_OPTIONS = 'DENY'`) ve HSTS etkinleştirilir.
 - **Sonraki Adım — Rate Limiting (Kapsam Dışı):** Prototip aşamasında harici redis veya ağır paketler eklenmemiştir. Üretim ortamında bot koruması ve brute-force saldırılarına karşı Cloudflare / Vercel Firewall kuralları veya `django-ratelimit` eklenmesi tavsiye edilir.
+
+---
+
+## 🚀 Vercel'e Dağıtım Rehberi (Faz 7)
+
+Proje Vercel Serverless mimarisiyle ve WhiteNoise statik dosya yönetimiyle tam uyumlu olarak yapılandırılmıştır.
+
+### 1. GitHub Bağlantısı ve Proje İçe Aktarma
+1. [Vercel Dashboard](https://vercel.com/dashboard) adresine gidin ve oturum açın.
+2. **Add New...** > **Project** butonuna tıklayın.
+3. GitHub reponuzu bulun ve seçin: `mustafakan1980-spec/application` > **Import** butonuna tıklayın.
+
+### 2. Ortam Değişkenlerini (Environment Variables) Tanımlama
+Vercel proje oluşturma ekranında **Environment Variables** bölümünü açın ve aşağıdaki değişkenleri tek tek ekleyin:
+
+| Değişken Adı | Örnek Değer / Açıklama |
+|---|---|
+| `SECRET_KEY` | Üretim için güçlü rastgele bir gizli anahtar |
+| `DEBUG` | `False` |
+| `ALLOWED_HOSTS` | `.vercel.app` *(Otomatik eklenir, özel domain varsa virgülle ekleyin)* |
+| `CSRF_TRUSTED_ORIGINS` | `https://*.vercel.app` *(Otomatik eklenir, özel domain varsa ekleyin)* |
+| `DATABASE_URL` | Supabase Transaction Pooler URI: `postgresql://postgres.[REF]:[SIFRE]@aws-0-[REGION].pooler.supabase.com:6543/postgres` |
+| `SUPABASE_URL` | `https://[REF].supabase.co` |
+| `SUPABASE_ANON_KEY` | Supabase anon public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service_role secret key *(Sunucuda imzalı indirme URL'i için)* |
+| `SUPABASE_STORAGE_BUCKET` | `sample-documents` |
+
+> ⚠️ **Önemli (Serverless Kuralı):** Veritabanı bağlantısı için doğrudan 5432 portu yerine Supabase Dashboard > **Project Settings** > **Database** > **Connection Pooling** altındaki **Transaction Pooler (Port 6543)** adresini kullanın. Django yapılandırmasında `conn_max_age=0` ve `disable_server_side_cursors=True` ayarlanmıştır.
+
+### 3. Build & Dağıtım
+- **Framework Preset:** `Other` (veya otomatik tespit edilen Django/Python)
+- **Build Command:** Otomatik olarak `vercel.json` ve `build_files.sh` dosyaları çalışacaktır (`collectstatic` build sırasında yürütülür).
+- **Deploy** butonuna tıklayın.
+
+### 4. Canlıda Kontrol Listesi (Deployment Checklist)
+Dağıtım tamamlandıktan sonra Vercel'in sağladığı canlı `.vercel.app` URL'inde şu adımları test edin:
+- [ ] **Ana Sayfa:** Sayfa açılıyor mu, arama çubuğu ve ülke kartları yükleniyor mu?
+- [ ] **Statik Dosyalar (CSS/JS/Font):** Tasarım ve renk paleti düzgün yükleniyor mu (`/static/css/tokens.css` ve `base.css`)?
+- [ ] **Arayüz Dilleri:** Header'dan `TR`, `EN`, `FR` geçişleri sorunsuz çalışıyor mu?
+- [ ] **Kayıt ve Giriş:** `/accounts/register/` ile yeni kullanıcı oluşturulabiliyor ve `/accounts/login/` ile giriş yapılabiliyor mu?
+- [ ] **Misafir Kilit Mantığı:** Giriş yapılmadan bir başvuru detayına gidildiğinde kilitli kart çıkıyor mu; sayfa kaynağında (View Source) gizli detaylar görünmüyor mu?
+- [ ] **Örnek Belge İndirme:** Üye girişi sonrası `/documents/<id>/download/` tıklandığında 60 saniyelik Supabase Signed URL'e yönlendirme yapılıyor mu?
+- [ ] **Yönetim Paneli:** `/admin/` adresi açılıyor mu ve süper kullanıcı ile giriş yapılabiliyor mu?
+
+---
+
+## 📝 Deploy Notları & Çözülen Sorunlar
+
+1. **Supabase Serverless Bağlantı Sayısı ve Pooler:**
+   - Serverless lambda fonksiyonları eşzamanlı isteklerde hızla çoğalabildiğinden doğrudan 5432 portu yerine Supabase Transaction Mode Pooler (6543) tercih edilmiştir.
+   - Transaction mode kullanırken Django'nun `disable_server_side_cursors=True` parametresi ayarlanarak olası "prepared statement does not exist" hataları engellenmiştir.
+
+2. **Serverless Diske Kalıcı Yazma Kısıtı:**
+   - Vercel Lambda ortamında yerel disk geçici (ephemeral) olduğundan, medya dosyaları ve kullanıcıya sunulan örnek başvuru belgeleri yerel disk yerine doğrudan **Supabase Storage** (Private bucket) üzerinden servis edilmiştir.
+
+3. **Veritabanı Migration'ları:**
+   - Migration komutları (`migrate`) Vercel build adımına bilinçli olarak **eklenmemiştir**; build adımlarının veritabanı kilitlerine yol açmaması için migration'lar yerel ortamdan canlı Supabase veritabanına uygulanmaktadır.
+
+4. **WhiteNoise Statik Dosya Sıkıştırma:**
+   - Vercel ortamında statik dosyaların eksiksiz ve en hızlı şekilde CDN üzerinden servis edilmesi için `whitenoise.storage.CompressedStaticFilesStorage` kullanılmıştır. Build esnasında `collectstatic --no-input --clear` çalıştırılmaktadır.
+
