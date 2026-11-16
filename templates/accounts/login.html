@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Giriş Yap" %} — Application{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div style="text-align: center; margin-bottom: 24px;">
+            <span class="pill pill-purple" style="margin-bottom: 12px;">{% trans "Hesabınıza Giriş Yapın" %}</span>
+            <h1 style="font-size: var(--font-size-2xl); font-weight: 800; color: var(--color-text); margin-bottom: 8px;">
+                {% trans "Tekrar Hoş Geldiniz" %}
+            </h1>
+            <p style="font-size: var(--font-size-sm); color: var(--color-text-muted);">
+                {% trans "E-posta adresiniz veya kullanıcı adınız ile giriş yapabilirsiniz." %}
+            </p>
+        </div>
+
+        {% if form.non_field_errors %}
+            <div class="form-error-alert">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}" novalidate>
+            {% csrf_token %}
+            {% if next_url %}
+                <input type="hidden" name="next" value="{{ next_url }}">
+            {% endif %}
+
+            <!-- Login ID (Email or Username) -->
+            <div class="form-group">
+                <label for="id_login_id" class="form-label">{% trans "E-posta veya Kullanıcı Adı" %}</label>
+                {{ form.login_id }}
+                {% if form.login_id.errors %}
+                    {% for err in form.login_id.errors %}
+                        <div class="field-error-msg">{{ err }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-- Parola -->
+            <div class="form-group">
+                <label for="id_password" class="form-label">{% trans "Parola" %}</label>
+                <div class="password-input-group">
+                    {{ form.password }}
+                    <button type="button" class="password-toggle-btn" data-target="id_password" aria-label="{% trans 'Parolayı göster/gizle' %}">👁️</button>
+                </div>
+                {% if form.password.errors %}
+                    {% for err in form.password.errors %}
+                        <div class="field-error-msg">{{ err }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 12px; padding: 14px;">
+                {% trans "Giriş Yap" %} &rarr;
+            </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--color-border); font-size: var(--font-size-sm); color: var(--color-text-muted);">
+            {% trans "Henüz hesabınız yok mu?" %}
+            <a href="{% url 'register' %}{% if next_url %}?next={{ next_url }}{% endif %}" style="font-weight: 700; color: var(--color-primary); margin-left: 4px;">
+                {% trans "Ücretsiz Kayıt Olun" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

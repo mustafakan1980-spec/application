@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans "Sayfa Bulunamadı (404)" %} — Application{% endblock %}
+{% block meta_description %}{% trans "Aradığınız sayfa silinmiş, adı değiştirilmiş veya geçici olarak kullanım dışı kalmış olabilir." %}{% endblock %}
+
+{% block content %}
+<div style="max-width: 680px; margin: 60px auto; text-align: center; padding: 48px 24px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-md);">
+    <div style="font-size: 72px; line-height: 1; margin-bottom: 16px;" aria-hidden="true">🧭</div>
+    <span class="pill pill-yellow" style="margin-bottom: 16px; font-weight: 700;">404 — {% trans "Kayıp Rota" %}</span>
+    
+    <h1 style="font-size: var(--font-size-2xl); font-weight: 800; color: var(--color-text-main); margin-bottom: 14px;">
+        {% trans "Aradığınız Sayfayı Bulamadık" %}
+    </h1>
+    
+    <p style="font-size: var(--font-size-md); color: var(--color-text-muted); line-height: 1.6; margin-bottom: 32px;">
+        {% trans "Ulaşmaya çalıştığınız başvuru rehberi veya sayfa taşınmış, silinmiş ya da yanlış bir bağlantı girilmiş olabilir." %}
+    </p>
+
+    <!-- Quick Search on 404 -->
+    <div style="max-width: 440px; margin: 0 auto 32px auto;">
+        <form action="{% url 'search' %}" method="get" class="search-form" role="search">
+            <input type="text" name="q" class="search-input" placeholder="{% trans 'Başvuru veya ülke adı arayın...' %}" aria-label="{% trans 'Arama' %}">
+            <button type="submit" class="search-btn" aria-label="{% trans 'Ara' %}">🔍</button>
+        </form>
+    </div>
+
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            🏠 {% trans "Ana Sayfaya Dön" %}
+        </a>
+        <a href="{% url 'country_list' %}" class="btn btn-outline">
+            🌍 {% trans "Tüm Ülkeleri İncele" %}
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Ülkeler Rehberi" %} — Application{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'home' %}">{% trans "Ana Sayfa" %}</a>
+    <span>&rsaquo;</span>
+    <span>{% trans "Ülkeler" %}</span>
+</div>
+
+<div style="margin-bottom: 32px;">
+    <h1 style="font-size: var(--font-size-3xl); font-weight: 800; color: var(--color-text); margin-bottom: 8px;">
+        🌍 {% trans "Ülkelere Göre Resmî Başvurular" %}
+    </h1>
+    <p style="font-size: var(--font-size-base); color: var(--color-text-muted);">
+        {% trans "Başvuru adımlarını ve belgelerini incelemek istediğiniz ülkeyi seçin." %}
+    </p>
+</div>
+
+<div class="grid-3">
+    {% for item in countries %}
+    <a href="{% url 'country_detail' item.country.iso2|lower %}" class="card" style="display: flex; align-items: center; gap: 20px; text-decoration: none;">
+        <span style="font-size: 48px; line-height: 1;">{{ item.country.flag_emoji }}</span>
+        <div style="flex: 1;">
+            <h2 style="font-size: var(--font-size-xl); font-weight: 700; color: var(--color-text); margin-bottom: 4px;">
+                {{ item.name }}
+            </h2>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="pill pill-purple">
+                    {{ item.country.iso2 }}
+                </span>
+                <span class="pill pill-teal">
+                    {{ item.procedures_count }} {% trans "başvuru" %}
+                </span>
+            </div>
+        </div>
+        <span style="color: var(--color-primary); font-weight: 700; font-size: 24px;">&rarr;</span>
+    </a>
+    {% empty %}
+    <div class="empty-state" style="grid-column: 1 / -1;">
+        <div class="empty-state-icon" aria-hidden="true">🌐</div>
+        <h2 class="empty-state-title">{% trans "Henüz Yayınlanmış Ülke Bulunmuyor" %}</h2>
+        <p class="empty-state-desc">{% trans "Sistemde henüz yayınlanmış bir ülke bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin." %}</p>
+        <a href="{% url 'home' %}" class="btn btn-outline btn-sm">🏠 {% trans "Ana Sayfaya Dön" %}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

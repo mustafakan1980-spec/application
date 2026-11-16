@@ -1,0 +1,444 @@
+{% extends "base.html" %}
+{% load i18n catalog_tags %}
+
+{% block title %}{{ translation.title }} — {{ country_name }} — Application{% endblock %}
+{% block meta_description %}{{ translation.summary|truncatechars:155 }}{% endblock %}
+
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ translation.title }} — {{ country_name }}{% endblock %}
+{% block og_description %}{{ translation.summary|truncatechars:200 }}{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+    <a href="{% url 'home' %}">{% trans "Ana Sayfa" %}</a>
+    <span>&rsaquo;</span>
+    <a href="{% url 'country_list' %}">{% trans "Ülkeler" %}</a>
+    <span>&rsaquo;</span>
+    <a href="{% url 'country_detail' procedure.country.iso2|lower %}">{{ country_name }}</a>
+    <span>&rsaquo;</span>
+    <span>{{ translation.title|truncatechars:35 }}</span>
+</div>
+
+<!-- Content Language Notification / Switcher -->
+<div class="content-banner {% if is_fallback %}warning{% endif %}">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        {% if is_fallback %}
+            <span>⚠️</span>
+            <span>
+                {% blocktrans with lang=content_language.name_native %}Bu içerik talep edilen dilde mevcut olmadığından ülkenin resmî dilinde gösterilmektedir: <strong>{{ lang }}</strong>{% endblocktrans %}
+            </span>
+        {% else %}
+            <span>🌐</span>
+            <span>
+                {% blocktrans with lang=content_language.name_native %}İçerik Dili: <strong>{{ lang }}</strong> (Ülke Resmî Dili){% endblocktrans %}
+            </span>
+        {% endif %}
+    </div>
+
+    <!-- Content Language Selector Pills -->
+    <div class="content-lang-pills">
+        <span style="font-size: 11px; color: var(--color-text-muted); font-weight: 600;">{% trans "Çeviriler:" %}</span>
+        {% for lang in available_languages %}
+            <a href="?lang={{ lang.code }}" class="{% if content_language.code == lang.code %}active{% endif %}">
+                {{ lang.code|upper }}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Main Procedure Header (Always Public) -->
+<div class="card" style="margin-bottom: 28px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <span class="pill pill-purple">{{ category_name }}</span>
+            <span class="pill pill-teal">{{ procedure.country.flag_emoji }} {{ country_name }}</span>
+            {% if procedure.last_verified_at %}
+                <span class="pill pill-yellow">
+                    ✅ {% trans "Son Doğrulama:" %} {{ procedure.last_verified_at|date:"d.m.Y" }}
+                </span>
+            {% endif %}
+            {% if can_view_details %}
+                <span class="pill pill-teal" style="font-weight: 700;">
+                    🔓 {% trans "Tam Erişim Aktif" %}
+                </span>
+            {% else %}
+                <span class="pill pill-yellow" style="font-weight: 700;">
+                    🔒 {% trans "Önizleme Modu" %}
+                </span>
+            {% endif %}
+        </div>
+
+        {% if procedure.official_source_url %}
+            <a href="{{ procedure.official_source_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                ↗️ {% trans "Resmî Kaynak" %}
+            </a>
+        {% endif %}
+    </div>
+
+    <h1 style="font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; color: var(--color-text); margin-bottom: 12px; line-height: 1.25;">
+        {{ translation.title }}
+    </h1>
+
+    <p style="font-size: var(--font-size-base); color: var(--color-primary); font-weight: 600; margin-bottom: 20px;">
+        🏛️ {{ institution_name }}
+    </p>
+
+    <!-- Public Summary Box -->
+    <div style="background-color: var(--color-bg); border-left: 4px solid var(--color-primary); padding: 18px 22px; border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+        <h2 style="font-size: var(--font-size-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-primary); margin-bottom: 6px;">
+            {% trans "Genel Özet" %}
+        </h2>
+        <p style="font-size: var(--font-size-base); color: var(--color-text); line-height: 1.6; margin: 0;">
+            {{ translation.summary }}
+        </p>
+    </div>
+</div>
+
+{% if can_view_details %}
+    <!-- ================================================================= -->
+    <!-- ÜYE GÖRÜNÜMÜ: TAM DETAY BÖLÜMLERİ                                  -->
+    <!-- ================================================================= -->
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 36px; align-items: start;" class="procedure-detail-layout">
+
+        <!-- Sol Sütun: Temel Adımlar, Şartlar ve Belgeler -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+
+            <!-- 1. Şartlar ve Uygunluk -->
+            {% if translation.eligibility %}
+            <div class="card">
+                <h2 style="font-size: var(--font-size-lg); font-weight: 800; color: var(--color-text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                    <span>📌</span> {% trans "Kimler Başvurabilir? (Uygunluk Şartları)" %}
+                </h2>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text); line-height: 1.7; white-space: pre-line;">
+                    {{ translation.eligibility }}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- 2. Gerekli Belgeler -->
+            {% if translation.required_documents %}
+            <div class="card">
+                <h2 style="font-size: var(--font-size-lg); font-weight: 800; color: var(--color-text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                    <span>📋</span> {% trans "Gerekli Resmî Belgeler" %}
+                </h2>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text); line-height: 1.7; white-space: pre-line;">
+                    {{ translation.required_documents }}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- 3. Adım Adım Başvuru Süreci (Akordeon / Numaralı Adımlar) -->
+            {% if translation.steps %}
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h2 style="font-size: var(--font-size-lg); font-weight: 800; color: var(--color-text); margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <span>🚶</span> {% trans "Adım Adım Başvuru Süreci" %}
+                    </h2>
+                    <span class="pill pill-purple" style="font-size: 11px;">
+                        {% trans "Akordeon Adımları" %}
+                    </span>
+                </div>
+
+                <!-- Steps Accordion List -->
+                <div class="steps-accordion" style="display: flex; flex-direction: column; gap: 12px;">
+                    {% for step_line in translation.steps|parse_lines %}
+                        <div class="accordion-item" style="border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: #FFF;">
+                            <button type="button" class="accordion-header" aria-expanded="true" style="width: 100%; text-align: left; background: none; border: none; padding: 14px 18px; font-weight: 700; font-size: var(--font-size-sm); color: var(--color-text); cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="background: var(--color-primary-light); color: var(--color-primary); width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;">
+                                        {{ forloop.counter }}
+                                    </span>
+                                    <span>{{ step_line|truncatechars:70 }}</span>
+                                </div>
+                                <span class="accordion-arrow" style="font-size: 12px; color: var(--color-text-muted); transition: transform 0.2s;" aria-hidden="true">▼</span>
+                            </button>
+                            <div class="accordion-body" style="padding: 0 18px 14px 54px; font-size: var(--font-size-sm); color: var(--color-text); line-height: 1.6; display: block;">
+                                {{ step_line }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- 4. Ücret, Süre ve Geçerlilik -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                {% if translation.fees_and_duration %}
+                <div class="card" style="margin: 0;">
+                    <h3 style="font-size: var(--font-size-sm); font-weight: 800; color: var(--color-text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;">
+                        <span>💰</span> {% trans "Harç ve İşlem Süresi" %}
+                    </h3>
+                    <p style="font-size: var(--font-size-sm); color: var(--color-text); line-height: 1.6; margin: 0; white-space: pre-line;">
+                        {{ translation.fees_and_duration }}
+                    </p>
+                </div>
+                {% endif %}
+
+                {% if translation.validity %}
+                <div class="card" style="margin: 0;">
+                    <h3 style="font-size: var(--font-size-sm); font-weight: 800; color: var(--color-text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;">
+                        <span>⏱️</span> {% trans "Geçerlilik Süresi" %}
+                    </h3>
+                    <p style="font-size: var(--font-size-sm); color: var(--color-text); line-height: 1.6; margin: 0;">
+                        {{ translation.validity }}
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- 5. Önemli Notlar -->
+            {% if translation.notes %}
+            <div class="card" style="background: #FFFDF5; border-color: #FFEAA7;">
+                <h3 style="font-size: var(--font-size-sm); font-weight: 800; color: #8A6D15; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                    <span>💡</span> {% trans "Önemli Notlar ve İpuçları" %}
+                </h3>
+                <p style="font-size: var(--font-size-sm); color: var(--color-text); line-height: 1.6; margin: 0; white-space: pre-line;">
+                    {{ translation.notes }}
+                </p>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- Sağ Sütun: Kurum İletişim Kartı ve Örnek Belgeler -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+
+            <!-- Resmî Kurum İletişim Kartı -->
+            {% if institution_details %}
+            <div class="card">
+                <h3 style="font-size: var(--font-size-md); font-weight: 800; color: var(--color-text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                    <span>🏛️</span> {% trans "Kurum İletişim Detayları" %}
+                </h3>
+
+                <p style="font-size: var(--font-size-sm); font-weight: 700; color: var(--color-primary); margin-bottom: 12px;">
+                    {{ institution_details.name }}
+                </p>
+
+                <div style="display: flex; flex-direction: column; gap: 10px; font-size: var(--font-size-sm);">
+                    {% if institution_details.phone %}
+                    <div style="display: flex; align-items: flex-start; gap: 8px;">
+                        <span style="color: var(--color-text-muted);">📞</span>
+                        <div>
+                            <span style="font-weight: 600; color: var(--color-text);">{% trans "Telefon:" %}</span>
+                            <span style="color: var(--color-text);">{{ institution_details.phone }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if institution_details.email %}
+                    <div style="display: flex; align-items: flex-start; gap: 8px;">
+                        <span style="color: var(--color-text-muted);">✉️</span>
+                        <div>
+                            <span style="font-weight: 600; color: var(--color-text);">{% trans "E-posta:" %}</span>
+                            <span style="color: var(--color-text);">{{ institution_details.email }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if institution_details.working_hours %}
+                    <div style="display: flex; align-items: flex-start; gap: 8px;">
+                        <span style="color: var(--color-text-muted);">🕒</span>
+                        <div>
+                            <span style="font-weight: 600; color: var(--color-text);">{% trans "Çalışma Saatleri:" %}</span>
+                            <span style="color: var(--color-text);">{{ institution_details.working_hours }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if institution_details.address_text %}
+                    <div style="display: flex; align-items: flex-start; gap: 8px;">
+                        <span style="color: var(--color-text-muted);">📍</span>
+                        <div>
+                            <span style="font-weight: 600; color: var(--color-text);">{% trans "Adres:" %}</span>
+                            <span style="color: var(--color-text);">{{ institution_details.address_text }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {% if institution_details.website %}
+                <div style="margin-top: 16px;">
+                    <a href="{{ institution_details.website }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="width: 100%; text-align: center;">
+                        ↗️ {% trans "Kurum Portalı" %}
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Örnek Belgeler (İndirme Butonu Aktif) -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                    <h3 style="font-size: var(--font-size-md); font-weight: 800; color: var(--color-text); margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <span>📎</span> {% trans "Örnek Belgeler" %}
+                    </h3>
+                    <span class="pill pill-purple" style="font-size: 11px;">
+                        {{ sample_documents|length }}
+                    </span>
+                </div>
+
+                {% if sample_documents %}
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        {% for doc_item in sample_documents %}
+                        <div style="padding: 14px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: #FAF9FF;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px;">
+                                <strong style="font-size: var(--font-size-sm); color: var(--color-text); line-height: 1.4;">
+                                    {{ doc_item.title }}
+                                </strong>
+                                <span style="background: var(--color-primary-light); color: var(--color-primary); font-weight: 800; font-size: 11px; padding: 4px 8px; border-radius: var(--radius-sm); white-space: nowrap;">
+                                    {{ doc_item.file_type }}
+                                </span>
+                            </div>
+
+                            {% if doc_item.description %}
+                            <p style="font-size: 12px; color: var(--color-text-muted); margin-bottom: 10px; line-height: 1.4;">
+                                {{ doc_item.description }}
+                            </p>
+                            {% endif %}
+
+                            <!-- Aktif Güvenli İndirme Butonu -->
+                            <a href="{{ doc_item.download_url }}" class="btn btn-primary btn-sm" style="width: 100%; text-align: center;">
+                                ⬇️ {% trans "İndir (60 sn İmzalı URL)" %}
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin: 0;">
+                        {% trans "Bu başvuru için henüz örnek belge eklenmemiştir." %}
+                    </p>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+{% else %}
+    <!-- ================================================================= -->
+    <!-- MİSAFİR GÖRÜNÜMÜ: KİLİTLİ ERİŞİM KAPISI (ACCESS GATE)               -->
+    <!-- DİKKAT: Detay içerikleri sunucudan HİÇ GÖNDERİLMEZ (Server-side)   -->
+    <!-- ================================================================= -->
+    <div style="display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 36px;">
+
+        <!-- Locked Card CTA -->
+        <div class="locked-section">
+            <div class="locked-card">
+                <div class="locked-icon">🔒</div>
+                <h2 style="font-size: var(--font-size-xl); font-weight: 800; color: var(--color-text); margin-bottom: 8px;">
+                    {% trans "Başvuru Detayları Kilitli" %}
+                </h2>
+                <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); line-height: 1.5; margin-bottom: 20px; max-width: 580px; margin-left: auto; margin-right: auto;">
+                    {% trans "Kimler başvurabilir, gerekli resmî evraklar, adım adım süreç, harç ve süre bilgileri ile kurum iletişim detaylarını görüntülemek ve örnek formları indirmek için ücretsiz üye olun." %}
+                </p>
+                <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                    <a href="{% url 'register' %}?next={{ request.get_full_path }}" class="btn btn-primary">
+                        {% trans "Ücretsiz Üye Ol" %}
+                    </a>
+                    <a href="{% url 'login' %}?next={{ request.get_full_path }}" class="btn btn-outline">
+                        {% trans "Giriş Yap" %}
+                    </a>
+                </div>
+                <p style="font-size: 11px; color: var(--color-text-muted); margin-top: 14px;">
+                    * {% trans "Üye olmak yalnızca 30 saniyenizi alır ve tüm ülke başvuru rehberlerini açar." %}
+                </p>
+            </div>
+
+            <!-- Blurred Skeleton Previews (Visual outlines only — No secret content in HTML) -->
+            <div style="margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; opacity: 0.45; filter: blur(0.5px); pointer-events: none;">
+                <div style="background: white; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: left;">
+                    <span style="font-weight: 700; font-size: 13px;">📋 {% trans "Gerekli Belgeler" %}</span>
+                    <p style="font-size: 11px; color: var(--color-text-muted); margin-top: 4px;">•••••••••••••••••••••••••</p>
+                </div>
+                <div style="background: white; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: left;">
+                    <span style="font-weight: 700; font-size: 13px;">🚶 {% trans "Başvuru Adımları" %}</span>
+                    <p style="font-size: 11px; color: var(--color-text-muted); margin-top: 4px;">•••••••••••••••••••••••••</p>
+                </div>
+                <div style="background: white; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: left;">
+                    <span style="font-weight: 700; font-size: 13px;">💰 {% trans "Ücret ve Süre" %}</span>
+                    <p style="font-size: 11px; color: var(--color-text-muted); margin-top: 4px;">•••••••••••••••••••••••••</p>
+                </div>
+                <div style="background: white; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: left;">
+                    <span style="font-weight: 700; font-size: 13px;">📞 {% trans "Kurum İletişim" %}</span>
+                    <p style="font-size: 11px; color: var(--color-text-muted); margin-top: 4px;">•••••••••••••••••••••••••</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Documents Box (Public Header List, Locked Download Pill) -->
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h2 style="font-size: var(--font-size-lg); font-weight: 700; color: var(--color-text); margin: 0;">
+                    📎 {% trans "Örnek Başvuru Belgeleri" %}
+                </h2>
+                <span class="pill pill-purple">
+                    {{ sample_documents|length }} {% trans "belge" %}
+                </span>
+            </div>
+
+            {% if sample_documents %}
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    {% for doc_item in sample_documents %}
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: #FAF9FF;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span style="background: var(--color-primary-light); color: var(--color-primary); font-weight: 800; font-size: 12px; padding: 6px 10px; border-radius: var(--radius-sm);">
+                                {{ doc_item.file_type }}
+                            </span>
+                            <div>
+                                <strong style="font-size: var(--font-size-sm); color: var(--color-text);">
+                                    {{ doc_item.title }}
+                                </strong>
+                                <p style="font-size: 11px; color: var(--color-text-muted); margin: 0;">
+                                    {% trans "Supabase Güvenli Depolama (Private Bucket)" %}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Locked download pill linking to login with next parameter -->
+                        <a href="{% url 'login' %}?next={{ doc_item.download_url }}" class="pill pill-yellow" style="text-decoration: none; font-weight: 700; font-size: 12px;">
+                            🔒 {% trans "İndirmek için Giriş Yapın" %}
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin: 0;">
+                    {% trans "Bu başvuru için henüz örnek belge yüklenmemiştir." %}
+                </p>
+            {% endif %}
+        </div>
+
+    </div>
+{% endif %}
+
+<!-- Accordion Toggle JavaScript (Lightweight & Framework-free) -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var headers = document.querySelectorAll('.accordion-header');
+    headers.forEach(function(header) {
+        header.addEventListener('click', function() {
+            var body = this.nextElementSibling;
+            var arrow = this.querySelector('.accordion-arrow');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                this.setAttribute('aria-expanded', 'true');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+            } else {
+                body.style.display = 'none';
+                this.setAttribute('aria-expanded', 'false');
+                if (arrow) arrow.style.transform = 'rotate(-90deg)';
+            }
+        });
+    });
+});
+</script>
+
+<style>
+@media (max-width: 840px) {
+    .procedure-detail-layout {
+        grid-template-columns: 1fr !important;
+    }
+}
+</style>
+{% endblock %}

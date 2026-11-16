@@ -1,0 +1,275 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Application 1.0\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Ülkeler"
+msgstr "Countries"
+
+msgid "Giriş"
+msgstr "Log In"
+
+msgid "Üye Ol"
+msgstr "Sign Up"
+
+msgid "Çıkış"
+msgstr "Log Out"
+
+msgid "Ana Sayfa"
+msgstr "Home"
+
+msgid "Arama"
+msgstr "Search"
+
+msgid "Detaylar"
+msgstr "Details"
+
+msgid "Görüntüle"
+msgstr "View"
+
+msgid "başvuru"
+msgstr "applications"
+
+msgid "başvuru prosedürü"
+msgstr "application procedures"
+
+msgid "Resmî Dil:"
+msgstr "Official Language:"
+
+msgid "Kategoriler:"
+msgstr "Categories:"
+
+msgid "Tümü"
+msgstr "All"
+
+msgid "İçeriğe Atla"
+msgstr "Skip to content"
+
+msgid "Hızlı Başvuru Arama"
+msgstr "Quick Search"
+
+msgid "Arayüz Dili"
+msgstr "Interface Language"
+
+msgid "Arama sorgusu"
+msgstr "Search query"
+
+msgid "Ara"
+msgstr "Search"
+
+msgid "Başvuru, ülke veya kategori ara..."
+msgstr "Search procedure, country or category..."
+
+msgid "Kullanıcı Navigasyonu"
+msgstr "User Navigation"
+
+msgid "Arayüz Dili Seçimi"
+msgstr "Language Selection"
+
+msgid "Dili değiştir:"
+msgstr "Switch language:"
+
+msgid "Sorumluluk Reddi:"
+msgstr "Disclaimer:"
+
+msgid "Bu sitedeki bilgiler genel bilgilendirme amaçlıdır ve resmî kurumları temsil etmez. Şartlar, ücretler ve belgeler zamanla değişebilir. Başvuru yapmadan önce mutlaka ilgili kurumun resmî kaynaklarından teyit edin."
+msgstr "The information on this site is for general informational purposes only and does not represent official institutions. Requirements, fees, and documents may change over time. Always verify with official sources of the relevant institution before applying."
+
+msgid "Tüm hakları saklıdır."
+msgstr "All rights reserved."
+
+msgid "Hesabınıza Giriş Yapın"
+msgstr "Sign In to Your Account"
+
+msgid "Tekrar Hoş Geldiniz"
+msgstr "Welcome Back"
+
+msgid "E-posta adresiniz veya kullanıcı adınız ile giriş yapabilirsiniz."
+msgstr "You can sign in with your email address or username."
+
+msgid "E-posta veya Kullanıcı Adı"
+msgstr "Email or Username"
+
+msgid "Parola"
+msgstr "Password"
+
+msgid "Giriş Yap"
+msgstr "Log In"
+
+msgid "Parolayı göster/gizle"
+msgstr "Show/hide password"
+
+msgid "Hesabınız yok mu?"
+msgstr "Don't have an account?"
+
+msgid "Hemen Ücretsiz Üye Olun"
+msgstr "Sign up for free now"
+
+msgid "Yeni Hesap Oluşturun"
+msgstr "Create a New Account"
+
+msgid "Ücretsiz Kayıt Olun"
+msgstr "Sign Up for Free"
+
+msgid "Tüm başvuru detaylarına ve örnek belgelere ücretsiz erişim için hesap oluşturun."
+msgstr "Create an account for free access to all application details and sample documents."
+
+msgid "Kullanıcı Adı"
+msgstr "Username"
+
+msgid "E-posta Adresi"
+msgstr "Email Address"
+
+msgid "Parolayı Tekrar Girin"
+msgstr "Confirm Password"
+
+msgid "Kayıt Ol"
+msgstr "Register"
+
+msgid "Zaten hesabınız var mı?"
+msgstr "Already have an account?"
+
+msgid "Üye Girişi Yapın"
+msgstr "Sign In"
+
+msgid "Sayfa Bulunamadı (404)"
+msgstr "Page Not Found (404)"
+
+msgid "Kayıp Rota"
+msgstr "Lost Route"
+
+msgid "Aradığınız Sayfayı Bulamadık"
+msgstr "We Couldn't Find The Page You Requested"
+
+msgid "Ulaşmaya çalıştığınız başvuru rehberi veya sayfa taşınmış, silinmiş ya da yanlış bir bağlantı girilmiş olabilir."
+msgstr "The application guide or page you are trying to reach may have been moved, deleted, or an incorrect link was entered."
+
+msgid "Başvuru veya ülke adı arayın..."
+msgstr "Search procedure or country name..."
+
+msgid "Ana Sayfaya Dön"
+msgstr "Back to Home"
+
+msgid "Tüm Ülkeleri İncele"
+msgstr "Explore All Countries"
+
+msgid "Bu Ülkede Henüz Başvuru Bulunmuyor"
+msgstr "No Procedures in This Country Yet"
+
+msgid "Seçilen kategori veya ülke için henüz bir resmî başvuru prosedürü eklenmemiş. Lütfen diğer kategorileri inceleyin veya ana sayfaya dönün."
+msgstr "No official application procedure has been added for this category or country yet. Please check other categories or return to the home page."
+
+msgid "Tüm Kategorileri Göster"
+msgstr "Show All Categories"
+
+msgid "Sonuç Bulunamadı"
+msgstr "No Results Found"
+
+msgid "Aradığınız kriterlere uygun resmî başvuru bulunamadı. Farklı bir terim veya ülke adı deneyebilir ya da tüm ülkeleri listeleyebilirsiniz."
+msgstr "No official procedures matched your search criteria. You can try a different search term or country name, or explore all countries."
+
+msgid "Henüz Yayınlanmış Ülke Bulunmuyor"
+msgstr "No Published Countries Yet"
+
+msgid "Sistemde henüz yayınlanmış bir ülke bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin."
+msgstr "There are no published countries in the system yet. Please check back later."
+
+msgid "Ülkeler Rehberi"
+msgstr "Countries Directory"
+
+msgid "Ülkelere Göre Resmî Başvurular"
+msgstr "Official Applications by Country"
+
+msgid "Başvuru adımlarını ve belgelerini incelemek istediğiniz ülkeyi seçin."
+msgstr "Select the country whose application steps and documents you want to review."
+
+msgid "Arama Sonuçları"
+msgstr "Search Results"
+
+msgid "için"
+msgstr "for"
+
+msgid "sonuç bulundu"
+msgstr "results found"
+
+msgid "Lütfen aramak istediğiniz anahtar kelimeyi yazın."
+msgstr "Please enter a search keyword."
+
+msgid "Çeviriler:"
+msgstr "Translations:"
+
+msgid "Resmî Başvuru Rehberi ve Süreçleri"
+msgstr "Official Application Guides and Procedures"
+
+msgid "Resmî Başvuru Rehberi"
+msgstr "Official Application Guide"
+
+msgid "Bu başvuru için henüz örnek belge yüklenmemiştir."
+msgstr "No sample documents uploaded for this application yet."
+
+msgid "İndirmek için Giriş Yapın"
+msgstr "Log in to Download"
+
+msgid "Örnek Başvuru Formunu İndir"
+msgstr "Download Sample Application Form"
+
+msgid "Örnek Başvuru Belgeleri"
+msgstr "Sample Application Documents"
+
+msgid "Kimler Başvurabilir? (Gereksinimler)"
+msgstr "Who Can Apply? (Eligibility)"
+
+msgid "Gerekli Evraklar ve Belgeler"
+msgstr "Required Documents"
+
+msgid "Adım Adım Başvuru Süreci"
+msgstr "Step-by-Step Application Process"
+
+msgid "Harç ve İşlem Süresi"
+msgstr "Fees & Processing Duration"
+
+msgid "Geçerlilik Süresi"
+msgstr "Validity Period"
+
+msgid "Önemli Notlar ve İpuçları"
+msgstr "Important Notes & Tips"
+
+msgid "Resmî Kurum ve Başvuru Noktası"
+msgstr "Official Institution & Office"
+
+msgid "Resmî Kurum Web Sitesi"
+msgstr "Official Institution Website"
+
+msgid "Çalışma Saatleri:"
+msgstr "Working Hours:"
+
+msgid "Telefon:"
+msgstr "Phone:"
+
+msgid "E-posta:"
+msgstr "Email:"
+
+msgid "Adres:"
+msgstr "Address:"
+
+msgid "Son Güncelleme / Doğrulama:"
+msgstr "Last Verified / Updated:"
+
+msgid "Resmî Başvuru Kaynağı"
+msgstr "Official Source Link"
+
+msgid "Tüm Detayları Görmek İçin Üye Olun veya Giriş Yapın"
+msgstr "Sign Up or Log In to View All Procedure Details"
+
+msgid "Bu resmî başvuruya ait gereksinimler, gerekli evraklar listesi, adım adım süreç ve indirilebilir örnek belgeler yalnızca kayıtlı üyelerimize açıktır."
+msgstr "Eligibility requirements, required documents list, step-by-step procedure and downloadable sample documents are available only to registered members."
+
+msgid "Ücretsiz Kayıt Ol & Detayları Gör"
+msgstr "Sign Up for Free & View Details"
+
+msgid "Zaten Üye misiniz? Giriş Yapın"
+msgstr "Already a Member? Log In"
+

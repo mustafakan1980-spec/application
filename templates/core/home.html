@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Application — {% trans "Dünya Ülkeleri Resmî Başvuru Rehberi" %}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section style="text-align: center; padding: 48px 0 32px; max-width: 820px; margin: 0 auto;">
+    <span class="pill pill-purple" style="margin-bottom: 16px;">
+        🌍 {% trans "Resmî Kurum Başvuru & Belge Platformu" %}
+    </span>
+    <h1 style="font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; color: var(--color-text); margin-bottom: 16px; line-height: 1.2;">
+        {% trans "Dünya Ülkelerindeki Resmî Başvurular, Tek Bir Yerde." %}
+    </h1>
+    <p style="font-size: var(--font-size-lg); color: var(--color-text-muted); margin-bottom: 32px;">
+        {% trans "Ehliyet, pasaport, çalışma izni ve resmî belgelerin şartları, adımları, ücretleri ve indirilebilir örnek formları." %}
+    </p>
+
+    <!-- Main Search Bar -->
+    <div style="max-width: 620px; margin: 0 auto 48px;">
+        <form action="{% url 'search' %}" method="get" class="search-form" style="box-shadow: var(--shadow-md);">
+            <input type="text" name="q" class="search-input" style="padding: 16px 24px; padding-right: 60px; font-size: 1.05rem;" placeholder="{% trans 'Hangi başvuru veya ülkeyi arıyorsunuz? (Örn: Senegal ehliyet, pasaport)' %}">
+            <button type="submit" class="search-btn" style="right: 12px; width: 44px; height: 44px;">🔍</button>
+        </form>
+    </div>
+</section>
+
+<!-- Popular Countries Section -->
+<section style="margin-bottom: 56px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+        <div>
+            <h2 style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-text);">
+                {% trans "Popüler Ülkeler" %}
+            </h2>
+            <p style="font-size: var(--font-size-sm); color: var(--color-text-muted);">
+                {% trans "Resmî başvuru rehberi hazırlanan ülkeler" %}
+            </p>
+        </div>
+        <a href="{% url 'country_list' %}" class="btn btn-outline btn-sm">
+            {% trans "Tüm Ülkeler" %} &rarr;
+        </a>
+    </div>
+
+    <div class="grid-3">
+        {% for item in countries %}
+        <a href="{% url 'country_detail' item.country.iso2|lower %}" class="card" style="display: flex; align-items: center; gap: 16px; text-decoration: none;">
+            <span style="font-size: 40px; line-height: 1;">{{ item.country.flag_emoji }}</span>
+            <div style="flex: 1;">
+                <h3 style="font-size: var(--font-size-lg); font-weight: 700; color: var(--color-text); margin-bottom: 4px;">
+                    {{ item.name }}
+                </h3>
+                <span class="pill pill-teal">
+                    {{ item.procedures_count }} {% trans "başvuru rehberi" %}
+                </span>
+            </div>
+            <span style="color: var(--color-primary); font-weight: 700; font-size: 20px;">&rarr;</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section style="margin-bottom: 56px;">
+    <h2 style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-text); margin-bottom: 24px;">
+        {% trans "Başvuru Kategorileri" %}
+    </h2>
+
+    <div class="grid-3">
+        {% for item in categories %}
+        <div class="card" style="display: flex; align-items: center; gap: 16px;">
+            <span style="font-size: 32px; background: var(--color-primary-light); width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+                {{ item.category.icon }}
+            </span>
+            <div>
+                <h3 style="font-size: var(--font-size-base); font-weight: 700; color: var(--color-text);">
+                    {{ item.name }}
+                </h3>
+                <span style="font-size: var(--font-size-xs); color: var(--color-text-muted);">
+                    {{ item.procedures_count }} {% trans "kayıtlı prosedür" %}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Recent / Featured Procedures -->
+<section style="margin-bottom: 48px;">
+    <h2 style="font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-text); margin-bottom: 24px;">
+        {% trans "Öne Çıkan Başvuru Rehberleri" %}
+    </h2>
+
+    <div class="grid-3">
+        {% for item in procedures %}
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span class="pill pill-purple">{{ item.category_name }}</span>
+                    <span style="font-size: 22px;">{{ item.procedure.country.flag_emoji }}</span>
+                </div>
+                <h3 style="font-size: var(--font-size-lg); font-weight: 700; color: var(--color-text); margin-bottom: 8px; line-height: 1.4;">
+                    <a href="{% url 'procedure_detail' item.procedure.slug %}">
+                        {{ item.title }}
+                    </a>
+                </h3>
+                <p style="font-size: var(--font-size-xs); color: var(--color-primary); font-weight: 600; margin-bottom: 10px;">
+                    🏛️ {{ item.institution_name }}
+                </p>
+                <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); line-height: 1.5; margin-bottom: 16px;">
+                    {{ item.summary|truncatechars:130 }}
+                </p>
+            </div>
+            <div style="border-top: 1px solid var(--color-border); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                <span class="pill pill-yellow" style="font-size: 11px;">
+                    {% trans "Resmî Dil:" %} {{ item.content_lang.name_native }}
+                </span>
+                <a href="{% url 'procedure_detail' item.procedure.slug %}" class="btn btn-secondary btn-sm">
+                    {% trans "İncele" %} &rarr;
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

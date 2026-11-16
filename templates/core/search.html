@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Arama Sonuçları" %} — Application{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'home' %}">{% trans "Ana Sayfa" %}</a>
+    <span>&rsaquo;</span>
+    <span>{% trans "Arama" %}</span>
+</div>
+
+<div style="margin-bottom: 32px;">
+    <h1 style="font-size: var(--font-size-3xl); font-weight: 800; color: var(--color-text); margin-bottom: 8px;">
+        {% trans "Arama Sonuçları" %}
+    </h1>
+    {% if query %}
+        <p style="font-size: var(--font-size-base); color: var(--color-text-muted);">
+            "<strong>{{ query }}</strong>" {% trans "için" %} <strong>{{ results_count }}</strong> {% trans "sonuç bulundu" %}.
+        </p>
+    {% else %}
+        <p style="font-size: var(--font-size-base); color: var(--color-text-muted);">
+            {% trans "Lütfen aramak istediğiniz anahtar kelimeyi yazın." %}
+        </p>
+    {% endif %}
+</div>
+
+<!-- Search Input -->
+<div style="max-width: 600px; margin-bottom: 40px;">
+    <form action="{% url 'search' %}" method="get" class="search-form">
+        <input type="text" name="q" class="search-input" value="{{ query }}" placeholder="{% trans 'Başvuru, ülke veya kategori ara...' %}">
+        <button type="submit" class="search-btn">🔍</button>
+    </form>
+</div>
+
+<!-- Results Grid -->
+{% if results %}
+    <div class="grid-3">
+        {% for item in results %}
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span class="pill pill-purple">{{ item.category_name }}</span>
+                    <span style="font-size: 22px;">{{ item.procedure.country.flag_emoji }}</span>
+                </div>
+                <h3 style="font-size: var(--font-size-lg); font-weight: 700; color: var(--color-text); margin-bottom: 8px;">
+                    <a href="{% url 'procedure_detail' item.procedure.slug %}">
+                        {{ item.title }}
+                    </a>
+                </h3>
+                <p style="font-size: var(--font-size-xs); color: var(--color-primary); font-weight: 600; margin-bottom: 8px;">
+                    🏛️ {{ item.institution_name }} ({{ item.country_name }})
+                </p>
+                <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); line-height: 1.5; margin-bottom: 16px;">
+                    {{ item.summary|truncatechars:140 }}
+                </p>
+            </div>
+            <div style="border-top: 1px solid var(--color-border); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                <span class="pill pill-yellow" style="font-size: 11px;">
+                    {{ item.content_lang.name_native }}
+                </span>
+                <a href="{% url 'procedure_detail' item.procedure.slug %}" class="btn btn-secondary btn-sm">
+                    {% trans "Görüntüle" %} &rarr;
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon" aria-hidden="true">🔍</div>
+        <h2 class="empty-state-title">{% trans "Sonuç Bulunamadı" %}</h2>
+        <p class="empty-state-desc">
+            {% trans "Aradığınız kriterlere uygun resmî başvuru bulunamadı. Farklı bir terim veya ülke adı deneyebilir ya da tüm ülkeleri listeleyebilirsiniz." %}
+        </p>
+        <a href="{% url 'country_list' %}" class="btn btn-primary">
+            🌍 {% trans "Tüm Ülkeleri İncele" %}
+        </a>
+    </div>
+{% endif %}
+{% endblock %}

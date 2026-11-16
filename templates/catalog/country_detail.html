@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ country_name }} — {% trans "Resmî Başvuru Rehberi ve Süreçleri" %} — Application{% endblock %}
+{% block meta_description %}{{ country_name }} için vize, oturum izni, okul kayıtları, ehliyet ve pasaport resmî başvuru adımları, şartları ve örnek formları.{% endblock %}
+
+{% block og_title %}{{ country_name }} — {% trans "Resmî Başvuru Rehberi" %}{% endblock %}
+{% block og_description %}{{ country_name }} için resmî kurum başvuruları, gerekli evraklar ve örnek belgeler.{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'home' %}">{% trans "Ana Sayfa" %}</a>
+    <span>&rsaquo;</span>
+    <a href="{% url 'country_list' %}">{% trans "Ülkeler" %}</a>
+    <span>&rsaquo;</span>
+    <span>{{ country_name }}</span>
+</div>
+
+<!-- Country Header -->
+<div class="card" style="margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <span style="font-size: 64px; line-height: 1;">{{ country.flag_emoji }}</span>
+        <div>
+            <h1 style="font-size: var(--font-size-3xl); font-weight: 800; color: var(--color-text); margin-bottom: 4px;">
+                {{ country_name }}
+            </h1>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="pill pill-purple">ISO: {{ country.iso2 }}</span>
+                <span class="pill pill-yellow">
+                    {% trans "Resmî Dil:" %} {{ country.primary_language.name_native }}
+                </span>
+                <span class="pill pill-teal">
+                    {{ procedures|length }} {% trans "başvuru prosedürü" %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Category Filter Pills -->
+{% if categories %}
+<div style="margin-bottom: 28px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+    <span style="font-size: var(--font-size-sm); font-weight: 600; color: var(--color-text-muted);">
+        {% trans "Kategoriler:" %}
+    </span>
+    <a href="{% url 'country_detail' country.iso2|lower %}" class="pill {% if not active_category %}pill-purple{% else %}pill-outline{% endif %}" style="text-decoration:none; {% if not active_category %}background:var(--color-primary);color:white;{% else %}background:white;border:1px solid var(--color-border);color:var(--color-text);{% endif %}">
+        {% trans "Tümü" %}
+    </a>
+    {% for cat_item in categories %}
+    <a href="?category={{ cat_item.category.slug }}" class="pill" style="text-decoration:none; {% if cat_item.is_active %}background:var(--color-primary);color:white;{% else %}background:white;border:1px solid var(--color-border);color:var(--color-text);{% endif %}">
+        <span>{{ cat_item.category.icon }}</span>
+        <span>{{ cat_item.name }}</span>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Procedures List -->
+<div class="grid-3">
+    {% for item in procedures %}
+    <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span class="pill pill-purple">{{ item.category_name }}</span>
+                <span class="pill pill-yellow" style="font-size: 11px;">
+                    {{ item.content_lang.code|upper }}
+                </span>
+            </div>
+
+            <h2 style="font-size: var(--font-size-lg); font-weight: 700; color: var(--color-text); margin-bottom: 8px; line-height: 1.4;">
+                <a href="{% url 'procedure_detail' item.procedure.slug %}">
+                    {{ item.title }}
+                </a>
+            </h2>
+
+            <p style="font-size: var(--font-size-xs); color: var(--color-primary); font-weight: 600; margin-bottom: 8px;">
+                🏛️ {{ item.institution_name }}
+            </p>
+
+            <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); line-height: 1.5; margin-bottom: 16px;">
+                {{ item.summary|truncatechars:140 }}
+            </p>
+        </div>
+
+        <div style="border-top: 1px solid var(--color-border); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: var(--font-size-xs); color: var(--color-text-muted);">
+                {% if item.procedure.last_verified_at %}
+                    ✅ {{ item.procedure.last_verified_at|date:"d.m.Y" }}
+                {% endif %}
+            </span>
+            <a href="{% url 'procedure_detail' item.procedure.slug %}" class="btn btn-secondary btn-sm">
+                {% trans "Detaylar" %} &rarr;
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="empty-state" style="grid-column: 1 / -1;">
+        <div class="empty-state-icon" aria-hidden="true">📋</div>
+        <h2 class="empty-state-title">{% trans "Bu Ülkede Henüz Başvuru Bulunmuyor" %}</h2>
+        <p class="empty-state-desc">
+            {% trans "Seçilen kategori veya ülke için henüz bir resmî başvuru prosedürü eklenmemiş. Lütfen diğer kategorileri inceleyin veya ana sayfaya dönün." %}
+        </p>
+        <a href="{% url 'country_detail' country.iso2|lower %}" class="btn btn-outline btn-sm">
+            {% trans "Tüm Kategorileri Göster" %}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

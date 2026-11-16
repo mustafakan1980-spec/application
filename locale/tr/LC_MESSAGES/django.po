@@ -1,0 +1,275 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Application 1.0\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Ülkeler"
+msgstr "Ülkeler"
+
+msgid "Giriş"
+msgstr "Giriş"
+
+msgid "Üye Ol"
+msgstr "Üye Ol"
+
+msgid "Çıkış"
+msgstr "Çıkış"
+
+msgid "Ana Sayfa"
+msgstr "Ana Sayfa"
+
+msgid "Arama"
+msgstr "Arama"
+
+msgid "Detaylar"
+msgstr "Detaylar"
+
+msgid "Görüntüle"
+msgstr "Görüntüle"
+
+msgid "başvuru"
+msgstr "başvuru"
+
+msgid "başvuru prosedürü"
+msgstr "başvuru prosedürü"
+
+msgid "Resmî Dil:"
+msgstr "Resmî Dil:"
+
+msgid "Kategoriler:"
+msgstr "Kategoriler:"
+
+msgid "Tümü"
+msgstr "Tümü"
+
+msgid "İçeriğe Atla"
+msgstr "İçeriğe Atla"
+
+msgid "Hızlı Başvuru Arama"
+msgstr "Hızlı Başvuru Arama"
+
+msgid "Arayüz Dili"
+msgstr "Arayüz Dili"
+
+msgid "Arama sorgusu"
+msgstr "Arama sorgusu"
+
+msgid "Ara"
+msgstr "Ara"
+
+msgid "Başvuru, ülke veya kategori ara..."
+msgstr "Başvuru, ülke veya kategori ara..."
+
+msgid "Kullanıcı Navigasyonu"
+msgstr "Kullanıcı Navigasyonu"
+
+msgid "Arayüz Dili Seçimi"
+msgstr "Arayüz Dili Seçimi"
+
+msgid "Dili değiştir:"
+msgstr "Dili değiştir:"
+
+msgid "Sorumluluk Reddi:"
+msgstr "Sorumluluk Reddi:"
+
+msgid "Bu sitedeki bilgiler genel bilgilendirme amaçlıdır ve resmî kurumları temsil etmez. Şartlar, ücretler ve belgeler zamanla değişebilir. Başvuru yapmadan önce mutlaka ilgili kurumun resmî kaynaklarından teyit edin."
+msgstr "Bu sitedeki bilgiler genel bilgilendirme amaçlıdır ve resmî kurumları temsil etmez. Şartlar, ücretler ve belgeler zamanla değişebilir. Başvuru yapmadan önce mutlaka ilgili kurumun resmî kaynaklarından teyit edin."
+
+msgid "Tüm hakları saklıdır."
+msgstr "Tüm hakları saklıdır."
+
+msgid "Hesabınıza Giriş Yapın"
+msgstr "Hesabınıza Giriş Yapın"
+
+msgid "Tekrar Hoş Geldiniz"
+msgstr "Tekrar Hoş Geldiniz"
+
+msgid "E-posta adresiniz veya kullanıcı adınız ile giriş yapabilirsiniz."
+msgstr "E-posta adresiniz veya kullanıcı adınız ile giriş yapabilirsiniz."
+
+msgid "E-posta veya Kullanıcı Adı"
+msgstr "E-posta veya Kullanıcı Adı"
+
+msgid "Parola"
+msgstr "Parola"
+
+msgid "Giriş Yap"
+msgstr "Giriş Yap"
+
+msgid "Parolayı göster/gizle"
+msgstr "Parolayı göster/gizle"
+
+msgid "Hesabınız yok mu?"
+msgstr "Hesabınız yok mu?"
+
+msgid "Hemen Ücretsiz Üye Olun"
+msgstr "Hemen Ücretsiz Üye Olun"
+
+msgid "Yeni Hesap Oluşturun"
+msgstr "Yeni Hesap Oluşturun"
+
+msgid "Ücretsiz Kayıt Olun"
+msgstr "Ücretsiz Kayıt Olun"
+
+msgid "Tüm başvuru detaylarına ve örnek belgelere ücretsiz erişim için hesap oluşturun."
+msgstr "Tüm başvuru detaylarına ve örnek belgelere ücretsiz erişim için hesap oluşturun."
+
+msgid "Kullanıcı Adı"
+msgstr "Kullanıcı Adı"
+
+msgid "E-posta Adresi"
+msgstr "E-posta Adresi"
+
+msgid "Parolayı Tekrar Girin"
+msgstr "Parolayı Tekrar Girin"
+
+msgid "Kayıt Ol"
+msgstr "Kayıt Ol"
+
+msgid "Zaten hesabınız var mı?"
+msgstr "Zaten hesabınız var mı?"
+
+msgid "Üye Girişi Yapın"
+msgstr "Üye Girişi Yapın"
+
+msgid "Sayfa Bulunamadı (404)"
+msgstr "Sayfa Bulunamadı (404)"
+
+msgid "Kayıp Rota"
+msgstr "Kayıp Rota"
+
+msgid "Aradığınız Sayfayı Bulamadık"
+msgstr "Aradığınız Sayfayı Bulamadık"
+
+msgid "Ulaşmaya çalıştığınız başvuru rehberi veya sayfa taşınmış, silinmiş ya da yanlış bir bağlantı girilmiş olabilir."
+msgstr "Ulaşmaya çalıştığınız başvuru rehberi veya sayfa taşınmış, silinmiş ya da yanlış bir bağlantı girilmiş olabilir."
+
+msgid "Başvuru veya ülke adı arayın..."
+msgstr "Başvuru veya ülke adı arayın..."
+
+msgid "Ana Sayfaya Dön"
+msgstr "Ana Sayfaya Dön"
+
+msgid "Tüm Ülkeleri İncele"
+msgstr "Tüm Ülkeleri İncele"
+
+msgid "Bu Ülkede Henüz Başvuru Bulunmuyor"
+msgstr "Bu Ülkede Henüz Başvuru Bulunmuyor"
+
+msgid "Seçilen kategori veya ülke için henüz bir resmî başvuru prosedürü eklenmemiş. Lütfen diğer kategorileri inceleyin veya ana sayfaya dönün."
+msgstr "Seçilen kategori veya ülke için henüz bir resmî başvuru prosedürü eklenmemiş. Lütfen diğer kategorileri inceleyin veya ana sayfaya dönün."
+
+msgid "Tüm Kategorileri Göster"
+msgstr "Tüm Kategorileri Göster"
+
+msgid "Sonuç Bulunamadı"
+msgstr "Sonuç Bulunamadı"
+
+msgid "Aradığınız kriterlere uygun resmî başvuru bulunamadı. Farklı bir terim veya ülke adı deneyebilir ya da tüm ülkeleri listeleyebilirsiniz."
+msgstr "Aradığınız kriterlere uygun resmî başvuru bulunamadı. Farklı bir terim veya ülke adı deneyebilir ya da tüm ülkeleri listeleyebilirsiniz."
+
+msgid "Henüz Yayınlanmış Ülke Bulunmuyor"
+msgstr "Henüz Yayınlanmış Ülke Bulunmuyor"
+
+msgid "Sistemde henüz yayınlanmış bir ülke bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin."
+msgstr "Sistemde henüz yayınlanmış bir ülke bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin."
+
+msgid "Ülkeler Rehberi"
+msgstr "Ülkeler Rehberi"
+
+msgid "Ülkelere Göre Resmî Başvurular"
+msgstr "Ülkelere Göre Resmî Başvurular"
+
+msgid "Başvuru adımlarını ve belgelerini incelemek istediğiniz ülkeyi seçin."
+msgstr "Başvuru adımlarını ve belgelerini incelemek istediğiniz ülkeyi seçin."
+
+msgid "Arama Sonuçları"
+msgstr "Arama Sonuçları"
+
+msgid "için"
+msgstr "için"
+
+msgid "sonuç bulundu"
+msgstr "sonuç bulundu"
+
+msgid "Lütfen aramak istediğiniz anahtar kelimeyi yazın."
+msgstr "Lütfen aramak istediğiniz anahtar kelimeyi yazın."
+
+msgid "Çeviriler:"
+msgstr "Çeviriler:"
+
+msgid "Resmî Başvuru Rehberi ve Süreçleri"
+msgstr "Resmî Başvuru Rehberi ve Süreçleri"
+
+msgid "Resmî Başvuru Rehberi"
+msgstr "Resmî Başvuru Rehberi"
+
+msgid "Bu başvuru için henüz örnek belge yüklenmemiştir."
+msgstr "Bu başvuru için henüz örnek belge yüklenmemiştir."
+
+msgid "İndirmek için Giriş Yapın"
+msgstr "İndirmek için Giriş Yapın"
+
+msgid "Örnek Başvuru Formunu İndir"
+msgstr "Örnek Başvuru Formunu İndir"
+
+msgid "Örnek Başvuru Belgeleri"
+msgstr "Örnek Başvuru Belgeleri"
+
+msgid "Kimler Başvurabilir? (Gereksinimler)"
+msgstr "Kimler Başvurabilir? (Gereksinimler)"
+
+msgid "Gerekli Evraklar ve Belgeler"
+msgstr "Gerekli Evraklar ve Belgeler"
+
+msgid "Adım Adım Başvuru Süreci"
+msgstr "Adım Adım Başvuru Süreci"
+
+msgid "Harç ve İşlem Süresi"
+msgstr "Harç ve İşlem Süresi"
+
+msgid "Geçerlilik Süresi"
+msgstr "Geçerlilik Süresi"
+
+msgid "Önemli Notlar ve İpuçları"
+msgstr "Önemli Notlar ve İpuçları"
+
+msgid "Resmî Kurum ve Başvuru Noktası"
+msgstr "Resmî Kurum ve Başvuru Noktası"
+
+msgid "Resmî Kurum Web Sitesi"
+msgstr "Resmî Kurum Web Sitesi"
+
+msgid "Çalışma Saatleri:"
+msgstr "Çalışma Saatleri:"
+
+msgid "Telefon:"
+msgstr "Telefon:"
+
+msgid "E-posta:"
+msgstr "E-posta:"
+
+msgid "Adres:"
+msgstr "Adres:"
+
+msgid "Son Güncelleme / Doğrulama:"
+msgstr "Son Güncelleme / Doğrulama:"
+
+msgid "Resmî Başvuru Kaynağı"
+msgstr "Resmî Başvuru Kaynağı"
+
+msgid "Tüm Detayları Görmek İçin Üye Olun veya Giriş Yapın"
+msgstr "Tüm Detayları Görmek İçin Üye Olun veya Giriş Yapın"
+
+msgid "Bu resmî başvuruya ait gereksinimler, gerekli evraklar listesi, adım adım süreç ve indirilebilir örnek belgeler yalnızca kayıtlı üyelerimize açıktır."
+msgstr "Bu resmî başvuruya ait gereksinimler, gerekli evraklar listesi, adım adım süreç ve indirilebilir örnek belgeler yalnızca kayıtlı üyelerimize açıktır."
+
+msgid "Ücretsiz Kayıt Ol & Detayları Gör"
+msgstr "Ücretsiz Kayıt Ol & Detayları Gör"
+
+msgid "Zaten Üye misiniz? Giriş Yapın"
+msgstr "Zaten Üye misiniz? Giriş Yapın"
+

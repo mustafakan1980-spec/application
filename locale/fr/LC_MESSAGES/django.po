@@ -1,0 +1,275 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Application 1.0\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Ülkeler"
+msgstr "Pays"
+
+msgid "Giriş"
+msgstr "Connexion"
+
+msgid "Üye Ol"
+msgstr "Inscription"
+
+msgid "Çıkış"
+msgstr "Déconnexion"
+
+msgid "Ana Sayfa"
+msgstr "Accueil"
+
+msgid "Arama"
+msgstr "Recherche"
+
+msgid "Detaylar"
+msgstr "Détails"
+
+msgid "Görüntüle"
+msgstr "Consulter"
+
+msgid "başvuru"
+msgstr "démarches"
+
+msgid "başvuru prosedürü"
+msgstr "procédures de demande"
+
+msgid "Resmî Dil:"
+msgstr "Langue officielle :"
+
+msgid "Kategoriler:"
+msgstr "Catégories :"
+
+msgid "Tümü"
+msgstr "Tous"
+
+msgid "İçeriğe Atla"
+msgstr "Passer au contenu"
+
+msgid "Hızlı Başvuru Arama"
+msgstr "Recherche rapide"
+
+msgid "Arayüz Dili"
+msgstr "Langue de l'interface"
+
+msgid "Arama sorgusu"
+msgstr "Requête de recherche"
+
+msgid "Ara"
+msgstr "Rechercher"
+
+msgid "Başvuru, ülke veya kategori ara..."
+msgstr "Rechercher démarche, pays ou catégorie..."
+
+msgid "Kullanıcı Navigasyonu"
+msgstr "Navigation utilisateur"
+
+msgid "Arayüz Dili Seçimi"
+msgstr "Sélection de la langue"
+
+msgid "Dili değiştir:"
+msgstr "Changer de langue :"
+
+msgid "Sorumluluk Reddi:"
+msgstr "Clause de non-responsabilité :"
+
+msgid "Bu sitedeki bilgiler genel bilgilendirme amaçlıdır ve resmî kurumları temsil etmez. Şartlar, ücretler ve belgeler zamanla değişebilir. Başvuru yapmadan önce mutlaka ilgili kurumun resmî kaynaklarından teyit edin."
+msgstr "Les informations figurant sur ce site sont fournies à titre indicatif et ne représentent pas les institutions officielles. Les conditions, tarifs et pièces justificatives peuvent évoluer. Vérifiez toujours auprès des sources officielles de l'organisme concerné avant d'entamer vos démarches."
+
+msgid "Tüm hakları saklıdır."
+msgstr "Tous droits réservés."
+
+msgid "Hesabınıza Giriş Yapın"
+msgstr "Connectez-vous à votre compte"
+
+msgid "Tekrar Hoş Geldiniz"
+msgstr "Ravi de vous revoir"
+
+msgid "E-posta adresiniz veya kullanıcı adınız ile giriş yapabilirsiniz."
+msgstr "Vous pouvez vous connecter avec votre adresse e-mail ou votre nom d'utilisateur."
+
+msgid "E-posta veya Kullanıcı Adı"
+msgstr "E-mail ou nom d'utilisateur"
+
+msgid "Parola"
+msgstr "Mot de passe"
+
+msgid "Giriş Yap"
+msgstr "Se connecter"
+
+msgid "Parolayı göster/gizle"
+msgstr "Afficher/masquer le mot de passe"
+
+msgid "Hesabınız yok mu?"
+msgstr "Vous n'avez pas de compte ?"
+
+msgid "Hemen Ücretsiz Üye Olun"
+msgstr "Inscrivez-vous gratuitement dès maintenant"
+
+msgid "Yeni Hesap Oluşturun"
+msgstr "Créer un nouveau compte"
+
+msgid "Ücretsiz Kayıt Olun"
+msgstr "Inscription gratuite"
+
+msgid "Tüm başvuru detaylarına ve örnek belgelere ücretsiz erişim için hesap oluşturun."
+msgstr "Créez un compte pour accéder gratuitement à tous les détails des démarches et aux formulaires types."
+
+msgid "Kullanıcı Adı"
+msgstr "Nom d'utilisateur"
+
+msgid "E-posta Adresi"
+msgstr "Adresse e-mail"
+
+msgid "Parolayı Tekrar Girin"
+msgstr "Confirmez le mot de passe"
+
+msgid "Kayıt Ol"
+msgstr "Créer un compte"
+
+msgid "Zaten hesabınız var mı?"
+msgstr "Vous avez déjà un compte ?"
+
+msgid "Üye Girişi Yapın"
+msgstr "Connectez-vous"
+
+msgid "Sayfa Bulunamadı (404)"
+msgstr "Page introuvable (404)"
+
+msgid "Kayıp Rota"
+msgstr "Page introuvable"
+
+msgid "Aradığınız Sayfayı Bulamadık"
+msgstr "Nous n'avons pas trouvé la page demandée"
+
+msgid "Ulaşmaya çalıştığınız başvuru rehberi veya sayfa taşınmış, silinmiş ya da yanlış bir bağlantı girilmiş olabilir."
+msgstr "Le guide ou la page que vous cherchez a peut-être été déplacé, supprimé ou l'adresse est incorrecte."
+
+msgid "Başvuru veya ülke adı arayın..."
+msgstr "Rechercher une démarche ou un pays..."
+
+msgid "Ana Sayfaya Dön"
+msgstr "Retour à l'accueil"
+
+msgid "Tüm Ülkeleri İncele"
+msgstr "Explorer tous les pays"
+
+msgid "Bu Ülkede Henüz Başvuru Bulunmuyor"
+msgstr "Aucune démarche pour ce pays pour le moment"
+
+msgid "Seçilen kategori veya ülke için henüz bir resmî başvuru prosedürü eklenmemiş. Lütfen diğer kategorileri inceleyin veya ana sayfaya dönün."
+msgstr "Aucune démarche officielle n'a encore été ajoutée pour cette catégorie ou ce pays. Veuillez consulter d'autres catégories ou revenir à l'accueil."
+
+msgid "Tüm Kategorileri Göster"
+msgstr "Afficher toutes les catégories"
+
+msgid "Sonuç Bulunamadı"
+msgstr "Aucun résultat trouvé"
+
+msgid "Aradığınız kriterlere uygun resmî başvuru bulunamadı. Farklı bir terim veya ülke adı deneyebilir ya da tüm ülkeleri listeleyebilirsiniz."
+msgstr "Aucune démarche officielle ne correspond à votre recherche. Vous pouvez essayer un autre terme ou explorer tous les pays."
+
+msgid "Henüz Yayınlanmış Ülke Bulunmuyor"
+msgstr "Aucun pays publié pour le moment"
+
+msgid "Sistemde henüz yayınlanmış bir ülke bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin."
+msgstr "Il n'y a aucun pays publié actuellement. Veuillez revenir plus tard."
+
+msgid "Ülkeler Rehberi"
+msgstr "Annuaire des pays"
+
+msgid "Ülkelere Göre Resmî Başvurular"
+msgstr "Démarches officielles par pays"
+
+msgid "Başvuru adımlarını ve belgelerini incelemek istediğiniz ülkeyi seçin."
+msgstr "Sélectionnez le pays dont vous souhaitez consulter les démarches et documents requis."
+
+msgid "Arama Sonuçları"
+msgstr "Résultats de recherche"
+
+msgid "için"
+msgstr "pour"
+
+msgid "sonuç bulundu"
+msgstr "résultats trouvés"
+
+msgid "Lütfen aramak istediğiniz anahtar kelimeyi yazın."
+msgstr "Veuillez saisir un mot-clé de recherche."
+
+msgid "Çeviriler:"
+msgstr "Traductions :"
+
+msgid "Resmî Başvuru Rehberi ve Süreçleri"
+msgstr "Guides et démarches officielles"
+
+msgid "Resmî Başvuru Rehberi"
+msgstr "Guide des démarches officielles"
+
+msgid "Bu başvuru için henüz örnek belge yüklenmemiştir."
+msgstr "Aucun modèle de document n'a encore été téléversé pour cette démarche."
+
+msgid "İndirmek için Giriş Yapın"
+msgstr "Connectez-vous pour télécharger"
+
+msgid "Örnek Başvuru Formunu İndir"
+msgstr "Télécharger le modèle de formulaire"
+
+msgid "Örnek Başvuru Belgeleri"
+msgstr "Modèles de documents officiels"
+
+msgid "Kimler Başvurabilir? (Gereksinimler)"
+msgstr "Conditions d'éligibilité"
+
+msgid "Gerekli Evraklar ve Belgeler"
+msgstr "Pièces justificatives requises"
+
+msgid "Adım Adım Başvuru Süreci"
+msgstr "Procédure étape par étape"
+
+msgid "Harç ve İşlem Süresi"
+msgstr "Frais et délais de traitement"
+
+msgid "Geçerlilik Süresi"
+msgstr "Durée de validité"
+
+msgid "Önemli Notlar ve İpuçları"
+msgstr "Notes importantes & conseils"
+
+msgid "Resmî Kurum ve Başvuru Noktası"
+msgstr "Organisme officiel et guichet"
+
+msgid "Resmî Kurum Web Sitesi"
+msgstr "Site officiel de l'organisme"
+
+msgid "Çalışma Saatleri:"
+msgstr "Horaires d'ouverture :"
+
+msgid "Telefon:"
+msgstr "Téléphone :"
+
+msgid "E-posta:"
+msgstr "E-mail :"
+
+msgid "Adres:"
+msgstr "Adresse :"
+
+msgid "Son Güncelleme / Doğrulama:"
+msgstr "Dernière vérification :"
+
+msgid "Resmî Başvuru Kaynağı"
+msgstr "Source officielle de la démarche"
+
+msgid "Tüm Detayları Görmek İçin Üye Olun veya Giriş Yapın"
+msgstr "Créez un compte ou connectez-vous pour voir tous les détails"
+
+msgid "Bu resmî başvuruya ait gereksinimler, gerekli evraklar listesi, adım adım süreç ve indirilebilir örnek belgeler yalnızca kayıtlı üyelerimize açıktır."
+msgstr "Les conditions d'éligibilité, la liste des pièces justificatives, les étapes détaillées et les formulaires téléchargeables sont réservés aux membres inscrits."
+
+msgid "Ücretsiz Kayıt Ol & Detayları Gör"
+msgstr "Créer un compte gratuit & voir les détails"
+
+msgid "Zaten Üye misiniz? Giriş Yapın"
+msgstr "Déjà membre ? Connectez-vous"
+

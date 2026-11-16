@@ -1,0 +1,134 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'tr' }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Application — Resmî Başvuru Rehberi{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Dünya ülkelerindeki resmî kurum başvurularının şartları, adımları, ücretleri ve örnek belgeleri.{% endblock %}">
+    <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
+
+    <!-- Canonical & Alternate Hreflang URLs -->
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    <link rel="alternate" hreflang="tr" href="{{ request.scheme }}://{{ request.get_host }}/tr{{ request.path|slice:'3:' }}">
+    <link rel="alternate" hreflang="en" href="{{ request.scheme }}://{{ request.get_host }}/en{{ request.path|slice:'3:' }}">
+    <link rel="alternate" hreflang="fr" href="{{ request.scheme }}://{{ request.get_host }}/fr{{ request.path|slice:'3:' }}">
+    <link rel="alternate" hreflang="x-default" href="{{ request.scheme }}://{{ request.get_host }}/tr{{ request.path|slice:'3:' }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{% block og_title %}{% block title_inner %}Application — Resmî Başvuru Rehberi{% endblock %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Dünya ülkelerindeki resmî kurum başvurularının şartları, adımları, ücretleri ve örnek belgeleri.{% endblock %}">
+    <meta property="og:site_name" content="Application">
+    <meta property="og:locale" content="{{ LANGUAGE_CODE|default:'tr' }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{% block twitter_title %}Application — Resmî Başvuru Rehberi{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Dünya ülkelerindeki resmî kurum başvurularının şartları, adımları, ücretleri ve örnek belgeleri.{% endblock %}">
+
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="{% static 'css/tokens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-to-content">{% trans "İçeriğe Atla" %}</a>
+
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container header-inner">
+            <a href="{% url 'home' %}" class="brand-logo" aria-label="Application Ana Sayfa">
+                <span>Application</span>
+                <span class="brand-badge">Prototip</span>
+            </a>
+
+            <!-- Header Quick Search -->
+            <div class="header-search">
+                <form action="{% url 'search' %}" method="get" class="search-form" role="search" aria-label="{% trans 'Hızlı Başvuru Arama' %}">
+                    <input type="text" name="q" class="search-input" placeholder="{% trans 'Başvuru, ülke veya kategori ara...' %}" value="{{ request.GET.q|default:'' }}" aria-label="{% trans 'Arama sorgusu' %}">
+                    <button type="submit" class="search-btn" aria-label="{% trans 'Ara' %}">🔍</button>
+                </form>
+            </div>
+
+            <nav class="nav-actions" role="navigation" aria-label="{% trans 'Kullanıcı Navigasyonu' %}">
+                <a href="{% url 'country_list' %}" class="btn btn-outline btn-sm">{% trans "Ülkeler" %}</a>
+
+                <!-- Interface Language Selector -->
+                <div class="lang-selector" title="{% trans 'Arayüz Dili' %}" role="region" aria-label="{% trans 'Arayüz Dili Seçimi' %}">
+                    {% get_current_language as CURRENT_LANG %}
+                    {% get_available_languages as AVAILABLE_LANGUAGES %}
+                    {% for lang_code, lang_name in AVAILABLE_LANGUAGES %}
+                        <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.path }}">
+                            <input name="language" type="hidden" value="{{ lang_code }}">
+                            <button type="submit" aria-label="{% trans 'Dili değiştir:' %} {{ lang_name }}" style="background:none;border:none;cursor:pointer;padding:4px 6px;font-weight:700;border-radius:4px;font-size:12px;color:{% if CURRENT_LANG == lang_code %}var(--color-primary){% else %}var(--color-text-muted){% endif %};background-color:{% if CURRENT_LANG == lang_code %}var(--color-primary-light){% else %}transparent{% endif %};">
+                                {{ lang_code|upper }}
+                            </button>
+                        </form>
+                    {% endfor %}
+                </div>
+
+                <!-- User Auth Actions -->
+                {% if request.user.is_authenticated %}
+                    <span class="pill pill-purple" style="font-weight: 700;">
+                        👤 {{ request.user.username }}
+                    </span>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline; margin: 0;">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button type="submit" class="btn btn-outline btn-sm">
+                            {% trans "Çıkış" %}
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-outline btn-sm">{% trans "Giriş" %}</a>
+                    <a href="{% url 'register' %}?next={{ request.path }}" class="btn btn-primary btn-sm">{% trans "Üye Ol" %}</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="site-main" tabindex="-1" role="main">
+        <div class="container">
+            {% if messages %}
+                <div style="margin-bottom: 24px;">
+                    {% for message in messages %}
+                        <div style="padding: 14px 18px; border-radius: var(--radius-md); margin-bottom: 10px; font-size: var(--font-size-sm); font-weight: 600;
+                                    {% if message.tags == 'error' %}background: #FFEAEA; color: var(--color-accent); border: 1px solid #FFA8A8;
+                                    {% elif message.tags == 'warning' %}background: var(--color-yellow-light); color: #8A6D15; border: 1px solid #FFEAA7;
+                                    {% elif message.tags == 'success' %}background: var(--color-secondary-light); color: var(--color-secondary); border: 1px solid #55EFC4;
+                                    {% else %}background: var(--color-primary-light); color: var(--color-primary); border: 1px solid var(--color-primary-medium);{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="disclaimer-box">
+                <strong>{% trans "Sorumluluk Reddi:" %}</strong>
+                {% trans "Bu sitedeki bilgiler genel bilgilendirme amaçlıdır ve resmî kurumları temsil etmez. Şartlar, ücretler ve belgeler zamanla değişebilir. Başvuru yapmadan önce mutlaka ilgili kurumun resmî kaynaklarından teyit edin." %}
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} Application. {% trans "Tüm hakları saklıdır." %}</p>
+                <p>{% trans "Dünya ülkeleri resmî başvuru rehberi" %}</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts -->
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
