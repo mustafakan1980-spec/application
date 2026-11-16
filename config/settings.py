@@ -31,6 +31,9 @@ if allowed_hosts_raw:
 else:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
+if '.vercel.app' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('.vercel.app')
+
 if DEBUG and '*' not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append('*')
 
@@ -40,6 +43,9 @@ if csrf_trusted_raw:
     CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in csrf_trusted_raw.split(',') if origin.strip()]
 else:
     CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000', 'http://[::1]:8000']
+
+if 'https://*.vercel.app' not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append('https://*.vercel.app')
 
 # Application definition
 INSTALLED_APPS = [
@@ -108,6 +114,7 @@ DATABASES = {
     'default': dj_database_url.config(
         default=DATABASE_URL,
         conn_max_age=0,  # Supabase transaction pooler uyumu için
+        disable_server_side_cursors=True,  # Supabase transaction pooler (port 6543) uyumu
     )
 }
 
